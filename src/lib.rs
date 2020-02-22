@@ -9,17 +9,17 @@ pub fn map<T,F>(inp: &[T], f: &F) -> Vec<T>
     res
 }
 
-pub trait Functional<T>{
+pub trait Func<T>{
     fn map<F>(self, f: &F) -> Self
-        where F: Fn(&mut T);
+        where F: Fn(T) -> T;
 }
 
-impl<T> Functional<T> for Vec<T>{
+impl<T: Copy> Func<T> for Vec<T>{
     fn map<F>(mut self, f: &F) -> Self
-    where F: Fn(&mut T){
+    where F: Fn(T) -> T{
         let len = self.len();
         for i in 0..len{
-            f(&mut self[i]);
+            self[i] = f(self[i]);
         }
         self
     }
@@ -38,11 +38,6 @@ mod tests {
     }
     #[test]
     fn test_functional_map(){
-        fn test(mut v: usize, f: &dyn Fn(&mut usize)) -> usize{
-            f(&mut v);
-            v
-        }
-        assert_eq!(test(0, &|&mut x| { x + 1; }), 1);
-        // assert_eq!(vec![0,1,2].map(&|x| {x + 1;}), vec![1,2,3]);
+        assert_eq!(vec![0,1,2].map(&|x| { x + 1 }), vec![1,2,3]);
     }
 }
