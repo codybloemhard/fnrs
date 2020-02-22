@@ -84,6 +84,29 @@ impl<T: Copy> Func<T> for Vec<T>{
     }
 }
 
+pub trait Sequence{
+    fn has_seq(&self, seq: &Self) -> bool;
+}
+
+impl<T: PartialEq> Sequence for Vec<T>{
+    fn has_seq(&self, seq: &Self) -> bool{
+        let mlen = std::cmp::min(self.len(), seq.len());
+        let slen = seq.len();
+        let mut j = 0;
+        for a in self{
+            if j == slen { return true; }
+            let b = &seq[j];
+            if a == b{
+                j += 1;
+            }else{
+                j = 0;
+            }
+        }
+        if j == slen { true }
+        else { false }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -95,6 +118,7 @@ mod tests {
     fn test_map(){
         assert_eq!(map(&vec![2,3,4], &|x| x + 1), vec![3,4,5]);
     }
+    // Func tests
     #[test]
     fn test_func_map_mut(){
         let mut v = vec![0,1,2];
@@ -129,5 +153,11 @@ mod tests {
         let mut v = vec![true,false,false,true,false];
         v.filter_swap_mut(&|x| *x);
         assert_eq!(v, vec![true,true]);
+    }
+    // Sequence tests
+    #[test]
+    fn test_sequence_has_seq(){
+        assert_eq!(vec![1,2,1,3,5,9,0].has_seq(&vec![1,3,5]), true);
+        assert_eq!(vec![1,2,1,3,5,9,0].has_seq(&vec![1,3,5,8]), false);
     }
 }
