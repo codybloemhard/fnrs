@@ -14,6 +14,8 @@ pub trait Func<T>{
         where F: Fn(T) -> T;
     fn map<F>(self, f: &F) -> Self
         where F: Fn(T) -> T;
+    fn fold<F,R>(&self, f: &F, v: R) -> R
+        where F: Fn(R,T) -> R;
 }
 
 impl<T: Copy> Func<T> for Vec<T>{
@@ -29,6 +31,13 @@ impl<T: Copy> Func<T> for Vec<T>{
         self.map_mut(f);
         self
     }
+    fn fold<F,R>(&self, f: &F, mut v: R) -> R
+    where F: Fn(R,T) -> R{
+        for x in self{
+            v = f(v,*x);
+        }
+        v
+    }
 }
 
 #[cfg(test)]
@@ -43,13 +52,17 @@ mod tests {
         assert_eq!(map(&vec![2,3,4], &|x| x + 1), vec![3,4,5]);
     }
     #[test]
-    fn test_inplace_map(){
+    fn test_func_map_mut(){
         let mut v = vec![0,1,2];
         v.map_mut(&|x| x + 1);
         assert_eq!(v,vec![1,2,3]);
     }
     #[test]
-    fn test_functional_map(){
-        assert_eq!(vec![0,1,2].map(&|x| { x + 1 }), vec![1,2,3]);
+    fn test_func_map(){
+        assert_eq!(vec![0,1,2].map(&|x| x + 1), vec![1,2,3]);
+    }
+    #[test]
+    fn test_func_fold(){
+        assert_eq!(vec![1,2,3,4].fold(&|r,x| r * x, 1), 24);
     }
 }
