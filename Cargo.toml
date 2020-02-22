@@ -3,6 +3,12 @@ name = "fnrs"
 version = "0.1.0"
 authors = ["Cody Bloemhard <cblmhrd@live.nl>"]
 edition = "2018"
+description = "A simple crate with some useful functions i like."
+license = "GPL-3.0"
+readme = "README.md"
+repository = "https://github.com/ocdy1001/fnrs"
+keywords = ["functional"]
+categories = ["functional"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

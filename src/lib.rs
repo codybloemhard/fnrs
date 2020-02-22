@@ -90,7 +90,6 @@ pub trait Sequence{
 
 impl<T: PartialEq> Sequence for Vec<T>{
     fn has_seq(&self, seq: &Self) -> bool{
-        let mlen = std::cmp::min(self.len(), seq.len());
         let slen = seq.len();
         let mut j = 0;
         for a in self{
