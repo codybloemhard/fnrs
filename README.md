@@ -1,3 +1,4 @@
+![Rust](https://github.com/ocdy1001/fnrs/workflows/Rust/badge.svg)
 # fnrs
 Some rusty functions that I fancy...
 ## Func
