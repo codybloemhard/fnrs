@@ -10,7 +10,7 @@
 /// ```
 #[macro_export]
 macro_rules! uworn{
-    ($inp:ident) => {
+    ($inp:expr) => {
         if let Some(value_inside_macro_some) = $inp { value_inside_macro_some }
         else { return Option::None; };
     }
