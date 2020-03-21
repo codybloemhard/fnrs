@@ -1,3 +1,20 @@
+/// uwors: UnWrap Or Return None
+/// # Example
+/// ```
+/// fn test() -> Option<bool>{
+///     let x = Some(1);
+///     let y = uworn!(x);
+///     return Some(y == 0);
+/// }
+/// assert_eq!(test(), Some(false));
+/// ```
+macro_rules! uworn{
+    ($inp:ident) => {
+        if let Some(value_inside_macro_some) = $inp { value_inside_macro_some }
+        else { return Option::None; };
+    }
+}
+
 /// Aplies function over each element in slice and returns a vector of the results in order.
 /// # Example
 /// ```
@@ -229,6 +246,15 @@ mod tests {
     #[test]
     fn it_works() {
         assert_eq!(2 + 2, 4);
+    }
+    #[test]
+    fn test_uworn(){
+        fn test() -> Option<bool>{
+            let x = Some(1);
+            let y = uworn!(x);
+            return Some(y == 0);
+        }
+        assert_eq!(test(), Some(false));
     }
     // #[test]
     // fn test_map(){
