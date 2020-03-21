@@ -1,6 +1,6 @@
 /// uwors: UnWrap Or Return None
 /// # Example
-/// ```
+/// ```ignore
 /// fn test() -> Option<bool>{
 ///     let x = Some(1);
 ///     let y = uworn!(x);
@@ -8,6 +8,7 @@
 /// }
 /// assert_eq!(test(), Some(false));
 /// ```
+#[macro_export]
 macro_rules! uworn{
     ($inp:ident) => {
         if let Some(value_inside_macro_some) = $inp { value_inside_macro_some }
