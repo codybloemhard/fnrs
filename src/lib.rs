@@ -88,6 +88,27 @@ impl<T: PartialEq> Sequence for Vec<T>{
     }
 }
 
+/// Init lot's of empty vecs easily
+/// # Example
+/// ```
+/// use fnrs::vecs;
+/// vecs!(a, b, c, d);
+/// a.push(0);
+/// b.push(0.0);
+/// c.push("aaaa");
+/// d.push(vec![0]);
+/// ```
+#[macro_export]
+macro_rules! vecs{
+    ($x:ident) => (
+        let mut $x = Vec::new();
+    );
+    ($x:ident, $($y:ident),+) => (
+        let mut $x = Vec::new();
+        vecs!($($y),+);
+    );
+}
+
 #[cfg(test)]
 mod tests {
     #[test]

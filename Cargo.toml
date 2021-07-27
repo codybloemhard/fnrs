@@ -1,6 +1,6 @@
 [package]
 name = "fnrs"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["Cody Bloemhard <cblmhrd@live.nl>"]
 edition = "2018"
 description = "A simple crate with some useful functions i like."
