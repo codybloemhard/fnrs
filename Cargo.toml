@@ -1,12 +1,12 @@
 [package]
 name = "fnrs"
-version = "0.1.7"
+version = "0.1.8"
 authors = ["Cody Bloemhard <codybloemhard@gmail.com>"]
-edition = "2018"
+edition = "2021"
 description = "A simple crate with some useful functions i like."
 license = "GPL-3.0"
 readme = "README.md"
-repository = "https://gitlab.com/codybloemhard/fnrs"
+repository = "https://github.com/codybloemhard/fnrs"
 keywords = ["functional"]
 categories = ["functional"]
 
